@@ -1,4 +1,4 @@
-#!/bin/bash
+    #!/bin/bash
 file="code.csv"
 if [ ! -f "$file" ]; then
 touch "$file"
@@ -91,6 +91,14 @@ Edit_task() {
         echo "Task ID not found!"
         return
     fi
+
+
+task_status=$(grep "^$task_id," "$file" | cut -d',' -f3)
+
+if [[ "$task_status" == "Completed" ]]; then
+    echo "You cannot edit a completed task!"
+    return
+fi
 
     echo "1. Edit Title"
     echo "2. Edit Date"
